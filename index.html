@@ -1,0 +1,40 @@
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<div id="biovis"></div>
+
+<script>
+	var d = [1];
+	
+	var C1 = "#3182bd"
+	var C2 = "#62798A"
+	var C3 = "#042D4A"
+	
+	var T1 = "Center of Box"
+	var T2 = "Center of Box 2"
+	var T3 = "Center of Box 3"
+	
+	var bv = d3.select('#biovis');
+
+	var svg = bv.append('svg')
+		.attr('width', 400)
+		.attr('height', 300);
+<!-- 	g tag to group
+ -->	
+	var sel = svg.selectAll('rect')
+		.data(d)
+		.enter().append('rect')
+		.attr('x', 0)
+		.attr('y', 0)
+		.attr('width', 400/2)
+		.attr('height', 300/2)
+		.style('fill', C1)
+		.on('click', function {
+			d3.select(this)
+			.transition()
+			.duration(500)
+			.ease('quad')
+			.attr('width', 400/3)
+			.attr('height', 300/3)
+			.style('fill', C2);
+		})
+</script>
