@@ -1,18 +1,18 @@
 <head>
 	<title>BioViz Lab 4</title>
-	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
 </head>
 
-<div id="biovis"></div>
+<div id='biovis'></div>
 
 <script>	
-	var C1 = "#3182bd"
-	var C2 = "#62798A"
-	var C3 = "#042D4A"
+	var C1 = '#3182bd'
+	var C2 = '#62798A'
+	var C3 = '#042D4A'
 	
-	var T1 = "Rect 1"
-	var T2 = "Rect 2"
-	var T3 = "Rect 3"
+	var T1 = 'Rect 1'
+	var T2 = 'Rect 2'
+	var T3 = 'Rect 3'
 	
 	var w = [400/2, 400/3, 400/4];
 	var h = [300/2, 300/3, 30];
@@ -21,29 +21,25 @@
 		.append('svg')
 		.attr('width', 400)
 		.attr('height', 300);
-		
-	var group = svg.append("svg:g")
-		.on('click', firstClick);
 
-	var rectangles = group.append("svg:rect")
+	var rectangles = svg.append('svg:rect')
 		.attr('x', 400/4)
 		.attr('y', 300/4)
 		.attr('width', 400/2)
 		.attr('height', 300/2)
-		.style('fill', C1);
-		//.on('click', firstRect);
-		//.transition().duration(500).ease('quad');
+		.style('fill', C1)
+		.on('click', firstClick);
 
-	var label = group.append("svg:text")
+	var label = svg.append('svg:text')
+		.attr('id', 'myText')
 		.attr('x', 400/2.3)
 		.attr('y', 300/1.9)
 		.text(T1)
 		.attr('font-family', 'sans-serif')
 		.attr('font-size', '20px')
 		.attr('fill', '#000000');
-		//.on('click', firstText);
 	
-	function firstClick(){
+	function firstRect(){
 		d3.select(this)
 		group.append('svg:rect')
 			.attr('width', 400/3)
@@ -54,54 +50,40 @@
 		group.append('svg:text')
 			.text(T2);
 	};
-	function firstRect(){
+	function firstClick(){
 		d3.select(this)
-		//.transition().duration(500).ease('quad')
+		.on('click', secondClick)
+		.transition().duration(500).ease('quad')
 		.attr('width', 400/3)
 		.attr('height', 300/3)
 		.attr('x', 400/3)
 		.attr('y', 300/3)
 		.style('fill', C2)
-		.on('click', secondRect);
+		d3.select('#myText')
+		.text(T2);
 	};
-	function firstText (){
+	function secondClick(){
 		d3.select(this)
-		.text(T2)
-		.on('click', secondText)
-	};
-	function secondRect(){
-		d3.select(this)
-		//.transition().duration(500).ease('quad')
+		.on('click', originalClick)
+		.transition().duration(500).ease('quad')
 		.attr('width', 400/4)
 		.attr('height', 300/4)
 		.attr('x', (400/4+400/8))
 		.attr('y', (300/4+300/8))
 		.style('fill', C3)
-		.on('click', originalRect);
+		d3.select('#myText')
+		.text(T3);
 	};
-	function secondText (){
+	function originalClick(){
 		d3.select(this)
-		.text(T3)
-		.on('click', originalText)
-	};
-	function originalRect(){
-		d3.select(this)
-		//.transition().duration(500).ease('quad')
+		.on('click', firstClick)
+		.transition().duration(500).ease('quad')
 		.attr('x', 400/4)
 		.attr('y', 300/4)
 		.attr('width', 400/2)
 		.attr('height', 300/2)
 		.style('fill', C1)
-		.on('click', firstRect)
+		d3.select('#myText')
+		.text(T1);
 	};
-	function originalText (){
-		d3.select(this)
-		.text(T1)
-		.on('click', firstText)
-	};
-	//svg.transition()
-		//.duration(500)
-		//.ease('quad');
-		// 400/4 300/4 (400/4+400/8) (300/4+300/8)
-		// g tag to group
 </script>
